@@ -1,0 +1,64 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled4.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyOzmm9uoTb/MXqwdserNgdb",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/VxctxrTL/daa_2021_1/blob/master/Tokenizer\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6VVyl4Q455Ym"
+      },
+      "source": [
+        "import pandas as pd\n",
+        "texts = [\n",
+        "\"\"\"Here’s to the crazy ones, the misfits, the rebels, the troublemakers, the round pegs in the square holes. The ones who see things differently — they’re not fond of rules. You can quote them, disagree with them, glorify or vilify them, but the only thing you can’t do is ignore them because they change things. They push the human race forward, and while some may see them as the crazy ones, we see genius, because the ones who are crazy enough to think that they can change the world, are the ones who do.\"\"\" ,\n",
+        " \n",
+        "'I choose a lazy person to do a hard job. Because a lazy person will find an easy way to do it.'\n",
+        "]\n",
+        "df = pd.DataFrame({'author': ['jobs', 'gates'], 'text':texts})"
+      ],
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rafI1lQq6GLL"
+      },
+      "source": [
+        "from sklearn.feature_extraction.text import CountVectorizer\n",
+        "# initialize\n",
+        "cv = CountVectorizer(stop_words='english') \n",
+        "cv_matrix = cv.fit_transform(df['text']) \n",
+        "# create document term matrix\n",
+        "df_dtm = pd.DataFrame(cv_matrix.toarray(), index=df['author'].values, columns=cv.get_feature_names())"
+      ],
+      "execution_count": 7,
+      "outputs": []
+    }
+  ]
+}
